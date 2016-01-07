@@ -1,0 +1,65 @@
+Input:
+var Relay = require('react-relay');
+var x = Relay.QL`
+  mutation {
+    actorSubscribe(input: $input) {
+      actor {
+        profilePicture,
+      },
+    },
+  }
+`;
+
+Output:
+var Relay = require('react-relay');
+var x = (function () {
+  return {
+    calls: [{
+      kind: 'Call',
+      metadata: {},
+      name: 'actorSubscribe',
+      value: {
+        kind: 'CallVariable',
+        callVariableName: 'input'
+      }
+    }],
+    children: [{
+      children: [{
+        fieldName: 'profilePicture',
+        kind: 'Field',
+        metadata: {
+          parentType: 'User'
+        }
+      }, {
+        fieldName: 'id',
+        kind: 'Field',
+        metadata: {
+          parentType: 'User',
+          isGenerated: true,
+          isRequisite: true
+        }
+      }],
+      fieldName: 'actor',
+      kind: 'Field',
+      metadata: {
+        parentType: 'ActorSubscribeResponsePayload',
+        inferredRootCallName: 'node',
+        inferredPrimaryKey: 'id'
+      }
+    }, {
+      fieldName: 'clientMutationId',
+      kind: 'Field',
+      metadata: {
+        parentType: 'ActorSubscribeResponsePayload',
+        isGenerated: true,
+        isRequisite: true
+      }
+    }],
+    kind: 'Mutation',
+    metadata: {
+      inputType: 'ActorSubscribeInput'
+    },
+    name: 'Mutation',
+    responseType: 'ActorSubscribeResponsePayload'
+  };
+})();

@@ -1,0 +1,91 @@
+Input:
+var Relay = require('react-relay');
+var x = Relay.QL`
+  query {
+    node(id: 123) {
+      ... on User {
+        profilePicture(size: $size) {
+          uri,
+        },
+      },
+    },
+  }
+`;
+
+Output:
+var Relay = require('react-relay');
+var x = (function () {
+  return {
+    calls: [{
+      kind: 'Call',
+      metadata: {},
+      name: 'id',
+      value: {
+        kind: 'CallValue',
+        callValue: 123
+      }
+    }],
+    children: [{
+      fieldName: 'id',
+      kind: 'Field',
+      metadata: {
+        parentType: 'Node',
+        isGenerated: true,
+        isRequisite: true
+      }
+    }, {
+      fieldName: '__typename',
+      kind: 'Field',
+      metadata: {
+        parentType: 'Node',
+        isGenerated: true,
+        isRequisite: true
+      }
+    }, {
+      children: [{
+        calls: [{
+          kind: 'Call',
+          metadata: {},
+          name: 'size',
+          value: {
+            kind: 'CallVariable',
+            callVariableName: 'size'
+          }
+        }],
+        children: [{
+          fieldName: 'uri',
+          kind: 'Field',
+          metadata: {
+            parentType: 'ProfilePicture'
+          }
+        }],
+        fieldName: 'profilePicture',
+        kind: 'Field',
+        metadata: {
+          parentType: 'User'
+        }
+      }, {
+        fieldName: 'id',
+        kind: 'Field',
+        metadata: {
+          parentType: 'User',
+          isGenerated: true,
+          isRequisite: true
+        }
+      }],
+      hash: 'rKKl5rZu',
+      kind: 'Fragment',
+      metadata: {
+        isConcrete: true
+      },
+      name: 'User',
+      type: 'User'
+    }],
+    fieldName: 'node',
+    kind: 'Query',
+    metadata: {
+      identifyingArgName: 'id'
+    },
+    name: 'FieldWithParams'
+  };
+})();

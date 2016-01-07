@@ -1,0 +1,37 @@
+Input:
+var foo = Relay.QL`
+  query UnionWithTypename {
+    media(id: 123) {
+      __typename,
+    },
+  }
+`;
+
+Output:
+var foo = (function () {
+  return {
+    calls: [{
+      kind: "Call",
+      metadata: {},
+      name: "id",
+      value: {
+        kind: "CallValue",
+        callValue: 123
+      }
+    }],
+    children: [{
+      fieldName: "__typename",
+      kind: "Field",
+      metadata: {
+        parentType: "Media",
+        isRequisite: true
+      }
+    }],
+    fieldName: "media",
+    kind: "Query",
+    metadata: {
+      identifyingArgName: "id"
+    },
+    name: "UnionWithTypename"
+  };
+})();

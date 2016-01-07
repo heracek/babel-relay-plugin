@@ -1,0 +1,47 @@
+Input:
+var RelayQL = require('react-relay/RelayQL');
+var x = RelayQL`
+  query {
+    node(id: 123) {
+      id,
+    },
+  }
+`;
+
+Output:
+var RelayQL = require('react-relay/RelayQL');
+var x = (function () {
+  return {
+    calls: [{
+      kind: 'Call',
+      metadata: {},
+      name: 'id',
+      value: {
+        kind: 'CallValue',
+        callValue: 123
+      }
+    }],
+    children: [{
+      fieldName: 'id',
+      kind: 'Field',
+      metadata: {
+        parentType: 'Node',
+        isRequisite: true
+      }
+    }, {
+      fieldName: '__typename',
+      kind: 'Field',
+      metadata: {
+        parentType: 'Node',
+        isGenerated: true,
+        isRequisite: true
+      }
+    }],
+    fieldName: 'node',
+    kind: 'Query',
+    metadata: {
+      identifyingArgName: 'id'
+    },
+    name: 'TagRelayQL'
+  };
+})();

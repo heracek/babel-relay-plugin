@@ -1,0 +1,76 @@
+Input:
+var Relay = require('Relay');
+var foo = Relay.QL`
+  fragment on User {
+    fakeConnection {
+      edges {
+        node {
+          id,
+        },
+      },
+    },
+  }
+`;
+
+Output:
+var Relay = require('Relay');
+var foo = (function () {
+  return {
+    children: [{
+      children: [{
+        children: [{
+          children: [{
+            fieldName: 'id',
+            kind: 'Field',
+            metadata: {
+              parentType: 'FakeNode',
+              isRequisite: true
+            }
+          }],
+          fieldName: 'node',
+          kind: 'Field',
+          metadata: {
+            parentType: 'FakeEdge',
+            inferredRootCallName: 'node',
+            inferredPrimaryKey: 'id',
+            isRequisite: true
+          }
+        }, {
+          fieldName: 'cursor',
+          kind: 'Field',
+          metadata: {
+            parentType: 'FakeEdge',
+            isGenerated: true,
+            isRequisite: true
+          }
+        }],
+        fieldName: 'edges',
+        kind: 'Field',
+        metadata: {
+          parentType: 'FakeConnection',
+          isPlural: true
+        }
+      }],
+      fieldName: 'fakeConnection',
+      kind: 'Field',
+      metadata: {
+        parentType: 'User'
+      }
+    }, {
+      fieldName: 'id',
+      kind: 'Field',
+      metadata: {
+        parentType: 'User',
+        isGenerated: true,
+        isRequisite: true
+      }
+    }],
+    hash: 'ZYteePov',
+    kind: 'Fragment',
+    metadata: {
+      isConcrete: true
+    },
+    name: 'FieldWithFakeConnection',
+    type: 'User'
+  };
+})();

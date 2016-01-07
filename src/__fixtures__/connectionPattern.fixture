@@ -1,0 +1,104 @@
+Input:
+var Relay = require('react-relay');
+var x = Relay.QL`
+  fragment on User @relay(pattern: true) {
+    friends {
+      edges {
+        node {
+          id,
+        },
+      },
+    },
+  }
+`;
+
+Output:
+var Relay = require('react-relay');
+var x = (function () {
+  return {
+    children: [{
+      children: [{
+        children: [{
+          children: [{
+            fieldName: 'id',
+            kind: 'Field',
+            metadata: {
+              parentType: 'User',
+              isRequisite: true
+            }
+          }],
+          fieldName: 'node',
+          kind: 'Field',
+          metadata: {
+            parentType: 'UserConnectionEdge',
+            inferredRootCallName: 'node',
+            inferredPrimaryKey: 'id',
+            isRequisite: true
+          }
+        }, {
+          fieldName: 'cursor',
+          kind: 'Field',
+          metadata: {
+            parentType: 'UserConnectionEdge',
+            isGenerated: true,
+            isRequisite: true
+          }
+        }],
+        fieldName: 'edges',
+        kind: 'Field',
+        metadata: {
+          parentType: 'UserConnection',
+          isPlural: true
+        }
+      }, {
+        children: [{
+          fieldName: 'hasNextPage',
+          kind: 'Field',
+          metadata: {
+            parentType: 'PageInfo',
+            isGenerated: true,
+            isRequisite: true
+          }
+        }, {
+          fieldName: 'hasPreviousPage',
+          kind: 'Field',
+          metadata: {
+            parentType: 'PageInfo',
+            isGenerated: true,
+            isRequisite: true
+          }
+        }],
+        fieldName: 'pageInfo',
+        kind: 'Field',
+        metadata: {
+          parentType: 'UserConnection',
+          isGenerated: true,
+          isRequisite: true
+        }
+      }],
+      fieldName: 'friends',
+      kind: 'Field',
+      metadata: {
+        parentType: 'User',
+        isConnection: true,
+        isFindable: true
+      }
+    }, {
+      fieldName: 'id',
+      kind: 'Field',
+      metadata: {
+        parentType: 'User',
+        isGenerated: true,
+        isRequisite: true
+      }
+    }],
+    hash: 'm+iXTD96',
+    kind: 'Fragment',
+    metadata: {
+      pattern: true,
+      isConcrete: true
+    },
+    name: 'ConnectionPattern',
+    type: 'User'
+  };
+})();

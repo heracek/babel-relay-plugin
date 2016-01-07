@@ -1,0 +1,37 @@
+Input:
+var Relay = require('react-relay');
+var x = Relay.QL`
+  query {
+    viewer {
+      pendingPosts {
+        count,
+      },
+    },
+  }
+`;
+
+Output:
+var Relay = require('react-relay');
+var x = (function () {
+  return {
+    children: [{
+      children: [{
+        fieldName: 'count',
+        kind: 'Field',
+        metadata: {
+          parentType: 'PendingPostsConnection'
+        }
+      }],
+      fieldName: 'pendingPosts',
+      kind: 'Field',
+      metadata: {
+        parentType: 'Viewer',
+        isConnection: true
+      }
+    }],
+    fieldName: 'viewer',
+    kind: 'Query',
+    metadata: {},
+    name: 'MetadataNonFindable'
+  };
+})();

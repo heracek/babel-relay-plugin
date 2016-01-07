@@ -1,0 +1,33 @@
+Input:
+var Relay = require('react-relay');
+var x = Relay.QL`fragment on Node @relay(plural: true) { id }`;
+
+Output:
+var Relay = require('react-relay');
+var x = (function () {
+  return {
+    children: [{
+      fieldName: 'id',
+      kind: 'Field',
+      metadata: {
+        parentType: 'Node',
+        isRequisite: true
+      }
+    }, {
+      fieldName: '__typename',
+      kind: 'Field',
+      metadata: {
+        parentType: 'Node',
+        isGenerated: true,
+        isRequisite: true
+      }
+    }],
+    hash: 'QHQnGWzc',
+    kind: 'Fragment',
+    metadata: {
+      plural: true
+    },
+    name: 'FragmentDirectives',
+    type: 'Node'
+  };
+})();

@@ -1,0 +1,52 @@
+Input:
+var foo = Relay.QL`
+  query Args {
+    nodes(ids: [$one, $two, 3]) {
+      id,
+    },
+  }
+`;
+
+Output:
+var foo = (function () {
+  return {
+    calls: [{
+      kind: "Call",
+      metadata: {},
+      name: "ids",
+      value: [{
+        kind: "CallVariable",
+        callVariableName: "one"
+      }, {
+        kind: "CallVariable",
+        callVariableName: "two"
+      }, {
+        kind: "CallValue",
+        callValue: 3
+      }]
+    }],
+    children: [{
+      fieldName: "id",
+      kind: "Field",
+      metadata: {
+        parentType: "Node",
+        isRequisite: true
+      }
+    }, {
+      fieldName: "__typename",
+      kind: "Field",
+      metadata: {
+        parentType: "Node",
+        isGenerated: true,
+        isRequisite: true
+      }
+    }],
+    fieldName: "nodes",
+    kind: "Query",
+    metadata: {
+      isPlural: true,
+      identifyingArgName: "ids"
+    },
+    name: "Args"
+  };
+})();

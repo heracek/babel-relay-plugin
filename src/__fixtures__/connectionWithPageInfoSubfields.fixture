@@ -1,0 +1,156 @@
+Input:
+var Relay = require('react-relay');
+var x = Relay.QL`
+  query {
+    node(id: 123) {
+      ... on User {
+        friends(first: 3) {
+          edges {
+            node {
+              name,
+            },
+          },
+          pageInfo,
+        },
+      },
+    },
+  }
+`;
+
+Output:
+var Relay = require('react-relay');
+var x = (function () {
+  return {
+    calls: [{
+      kind: 'Call',
+      metadata: {},
+      name: 'id',
+      value: {
+        kind: 'CallValue',
+        callValue: 123
+      }
+    }],
+    children: [{
+      fieldName: 'id',
+      kind: 'Field',
+      metadata: {
+        parentType: 'Node',
+        isGenerated: true,
+        isRequisite: true
+      }
+    }, {
+      fieldName: '__typename',
+      kind: 'Field',
+      metadata: {
+        parentType: 'Node',
+        isGenerated: true,
+        isRequisite: true
+      }
+    }, {
+      children: [{
+        calls: [{
+          kind: 'Call',
+          metadata: {},
+          name: 'first',
+          value: {
+            kind: 'CallValue',
+            callValue: 3
+          }
+        }],
+        children: [{
+          children: [{
+            children: [{
+              fieldName: 'name',
+              kind: 'Field',
+              metadata: {
+                parentType: 'User'
+              }
+            }, {
+              fieldName: 'id',
+              kind: 'Field',
+              metadata: {
+                parentType: 'User',
+                isGenerated: true,
+                isRequisite: true
+              }
+            }],
+            fieldName: 'node',
+            kind: 'Field',
+            metadata: {
+              parentType: 'UserConnectionEdge',
+              inferredRootCallName: 'node',
+              inferredPrimaryKey: 'id',
+              isRequisite: true
+            }
+          }, {
+            fieldName: 'cursor',
+            kind: 'Field',
+            metadata: {
+              parentType: 'UserConnectionEdge',
+              isGenerated: true,
+              isRequisite: true
+            }
+          }],
+          fieldName: 'edges',
+          kind: 'Field',
+          metadata: {
+            parentType: 'UserConnection',
+            isPlural: true
+          }
+        }, {
+          children: [{
+            fieldName: 'hasNextPage',
+            kind: 'Field',
+            metadata: {
+              parentType: 'PageInfo',
+              isGenerated: true,
+              isRequisite: true
+            }
+          }, {
+            fieldName: 'hasPreviousPage',
+            kind: 'Field',
+            metadata: {
+              parentType: 'PageInfo',
+              isGenerated: true,
+              isRequisite: true
+            }
+          }],
+          fieldName: 'pageInfo',
+          kind: 'Field',
+          metadata: {
+            parentType: 'UserConnection',
+            isRequisite: true
+          }
+        }],
+        fieldName: 'friends',
+        kind: 'Field',
+        metadata: {
+          parentType: 'User',
+          isConnection: true,
+          isFindable: true
+        }
+      }, {
+        fieldName: 'id',
+        kind: 'Field',
+        metadata: {
+          parentType: 'User',
+          isGenerated: true,
+          isRequisite: true
+        }
+      }],
+      hash: 'MQPKyXGk',
+      kind: 'Fragment',
+      metadata: {
+        isConcrete: true
+      },
+      name: 'User',
+      type: 'User'
+    }],
+    fieldName: 'node',
+    kind: 'Query',
+    metadata: {
+      identifyingArgName: 'id'
+    },
+    name: 'ConnectionWithPageInfoSubfields'
+  };
+})();

@@ -1,0 +1,64 @@
+Input:
+var Relay = require('react-relay');
+var x = Relay.QL`
+  query {
+    viewer {
+      __configs__ {
+        edges {
+          node {
+            name,
+          },
+        },
+      },
+    },
+  }
+`;
+
+Output:
+var Relay = require('react-relay');
+var x = (function () {
+  return {
+    children: [{
+      children: [{
+        children: [{
+          children: [{
+            fieldName: 'name',
+            kind: 'Field',
+            metadata: {
+              parentType: 'Config'
+            }
+          }],
+          fieldName: 'node',
+          kind: 'Field',
+          metadata: {
+            parentType: 'ConfigsConnectionEdge',
+            isRequisite: true
+          }
+        }, {
+          fieldName: 'cursor',
+          kind: 'Field',
+          metadata: {
+            parentType: 'ConfigsConnectionEdge',
+            isGenerated: true,
+            isRequisite: true
+          }
+        }],
+        fieldName: 'edges',
+        kind: 'Field',
+        metadata: {
+          parentType: 'ConfigsConnection',
+          isPlural: true
+        }
+      }],
+      fieldName: '__configs__',
+      kind: 'Field',
+      metadata: {
+        parentType: 'Viewer'
+      }
+    }],
+    fieldName: 'viewer',
+    kind: 'Query',
+    metadata: {},
+    name: 'MetadataConnectionLimitable'
+  };
+})();

@@ -1,0 +1,93 @@
+Input:
+var Relay = require('react-relay');
+var x = Relay.QL`
+  query {
+    node(id: 456) {
+      ... on Story {
+        actors {
+          id,
+          __typename,
+        },
+      },
+    },
+  }
+`;
+
+Output:
+var Relay = require('react-relay');
+var x = (function () {
+  return {
+    calls: [{
+      kind: 'Call',
+      metadata: {},
+      name: 'id',
+      value: {
+        kind: 'CallValue',
+        callValue: 456
+      }
+    }],
+    children: [{
+      fieldName: 'id',
+      kind: 'Field',
+      metadata: {
+        parentType: 'Node',
+        isGenerated: true,
+        isRequisite: true
+      }
+    }, {
+      fieldName: '__typename',
+      kind: 'Field',
+      metadata: {
+        parentType: 'Node',
+        isGenerated: true,
+        isRequisite: true
+      }
+    }, {
+      children: [{
+        children: [{
+          fieldName: 'id',
+          kind: 'Field',
+          metadata: {
+            parentType: 'User',
+            isRequisite: true
+          }
+        }, {
+          fieldName: '__typename',
+          kind: 'Field',
+          metadata: {
+            parentType: 'User'
+          }
+        }],
+        fieldName: 'actors',
+        kind: 'Field',
+        metadata: {
+          parentType: 'Story',
+          inferredRootCallName: 'node',
+          inferredPrimaryKey: 'id',
+          isPlural: true
+        }
+      }, {
+        fieldName: 'id',
+        kind: 'Field',
+        metadata: {
+          parentType: 'Story',
+          isGenerated: true,
+          isRequisite: true
+        }
+      }],
+      hash: 'EI7Xtg8w',
+      kind: 'Fragment',
+      metadata: {
+        isConcrete: true
+      },
+      name: 'Story',
+      type: 'Story'
+    }],
+    fieldName: 'node',
+    kind: 'Query',
+    metadata: {
+      identifyingArgName: 'id'
+    },
+    name: 'PluralField'
+  };
+})();
