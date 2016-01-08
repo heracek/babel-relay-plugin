@@ -468,7 +468,7 @@ class RelayQLPrinter {
       const metadata = maybeMetadata;
       Object.keys(metadata).forEach(key => {
         if (metadata[key]) {
-          properties.push(property(key, t.literal(metadata[key])));
+          properties.push(property(key, t.booleanLiteral(metadata[key])));
         }
       });
     }

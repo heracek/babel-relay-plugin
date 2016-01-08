@@ -157,7 +157,7 @@ class RelayQLTransformer {
     let rest = matches[3];
     // Allow `fragment on Type {...}`.
     if (type === 'fragment' && name === 'on') {
-      name = documentName;
+      name = documentName.replace(/\W/g, '');
       rest = 'on' + rest;
     }
     const definitionName = capitalize(name);
